@@ -4,35 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>newword identification | Eilene&#39;s blog</title>
+    <title>bandit learning | Eilene&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="xubingbing">
     
 
     
-    <meta name="description" content="newword identification
-
-通过查阅论文结合自己的想法实现了下大规模微博语料中的新词识别
-
-&amp;#160; &amp;#160; &amp;#160; &amp;#160;最近大概了解了下新词识别方面的知识，然后增加了一些自己的思路，做了简单的实现，下面大概说明一下。新词识别，目的即为从大规模数据中发现新词，即未在词典中登录的词语，一般思路都是先找到候选字符串，然后判别这些字符串是否为新词。但是在以上两">
+    <meta name="description" content="Eilene 是基于github和hexo的静态博客，希望能对学习的知识和生活所感做个记录">
 <meta property="og:type" content="article">
-<meta property="og:title" content="newword identification">
-<meta property="og:url" content="http://eilene.github.io/2016/08/08/newword-identification/index.html">
+<meta property="og:title" content="bandit learning">
+<meta property="og:url" content="http://eilene.github.io/2016/07/08/banditlearning/index.html">
 <meta property="og:site_name" content="Eilene's blog">
-<meta property="og:description" content="newword identification
-
-通过查阅论文结合自己的想法实现了下大规模微博语料中的新词识别
-
-&amp;#160; &amp;#160; &amp;#160; &amp;#160;最近大概了解了下新词识别方面的知识，然后增加了一些自己的思路，做了简单的实现，下面大概说明一下。新词识别，目的即为从大规模数据中发现新词，即未在词典中登录的词语，一般思路都是先找到候选字符串，然后判别这些字符串是否为新词。但是在以上两">
-<meta property="og:updated_time" content="2016-08-08T15:41:10.000Z">
+<meta property="og:description" content="Eilene 是基于github和hexo的静态博客，希望能对学习的知识和生活所感做个记录">
+<meta property="og:updated_time" content="2016-08-09T12:50:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="newword identification">
-<meta name="twitter:description" content="newword identification
-
-通过查阅论文结合自己的想法实现了下大规模微博语料中的新词识别
-
-&amp;#160; &amp;#160; &amp;#160; &amp;#160;最近大概了解了下新词识别方面的知识，然后增加了一些自己的思路，做了简单的实现，下面大概说明一下。新词识别，目的即为从大规模数据中发现新词，即未在词典中登录的词语，一般思路都是先找到候选字符串，然后判别这些字符串是否为新词。但是在以上两">
+<meta name="twitter:title" content="bandit learning">
+<meta name="twitter:description" content="Eilene 是基于github和hexo的静态博客，希望能对学习的知识和生活所感做个记录">
 
     
     
@@ -93,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/08/08/newword-identification/" title="newword identification" itemprop="url">newword identification</a>
+      <a href="/2016/07/08/banditlearning/" title="bandit learning" itemprop="url">bandit learning</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="xubingbing" target="_blank" itemprop="author">xubingbing</a>
 		
   <p class="article-time">
-    <time datetime="2016-08-08T15:34:19.000Z" itemprop="datePublished"> 发表于 2016-08-08</time>
+    <time datetime="2016-07-08T15:42:45.000Z" itemprop="datePublished"> 发表于 2016-07-08</time>
     
   </p>
 </header>
@@ -109,29 +97,24 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#newword-identification"><span class="toc-number">1.</span> <span class="toc-text">newword identification</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h2 id="newword-identification"><a href="#newword-identification" class="headerlink" title="newword identification"></a>newword identification</h2><hr>
-<blockquote>
-<p>通过查阅论文结合自己的想法实现了下大规模微博语料中的新词识别</p>
-</blockquote>
-<p>&#160; &#160; &#160; &#160;最近大概了解了下新词识别方面的知识，然后增加了一些自己的思路，做了简单的实现，下面大概说明一下。<br>新词识别，目的即为从大规模数据中发现新词，即未在词典中登录的词语，一般思路都是先找到候选字符串，然后判别这些字符串是否为新词。但是在以上两个步骤的具体实现中，实用的方法却各有千秋。<br>&#160; &#160; &#160; &#160;候选字符串提取包括n元递增算法，ngram算法以及指定模式提取。关于ngram算法我并没有尝试，并且我对ngram了解不多，所以这里不做过多说明。我首先尝试了n元递增算法，直白点讲，这种算法提取了语料中所有长度为2-n的字符串，可想而知，这种算法提取到的字符串是海量的，尤其是当提取字符串长度增加，提取到的数量大幅度增加，同时，这种方法提取到的字符串因为没有考虑到任何规律性之类的内容，大部分都为垃圾串。鉴于以上，我尝试了另一种算法：先对语料进行分词，然后从分词结果中提取指定模式的字符串。分词是基于词典的，词典的不完备导致分词结果不准确，但是观察发现，新词以散列字符的形式呈现在结果中，因此从结果中提取1+1，1+1+1，1+1+1 和2+1，3+1模式的字符串，这样处理，字符串的数量肯定还是巨大的，但是相比上一种算法来说，数量有了很大的减少。<br>&#160; &#160; &#160; &#160;提取完字符串后，便要判别字符串是否为新词，我将之前论文和博客中的方法做了个整合，我首先对字符串进行过滤，过滤包括频数过滤，词典过滤，子串过滤及停用词表过滤。其中停用词表过滤是指自己依赖于单字符构词模式和构词能力构造的词首停用词表，词尾停用词表等。过滤后针对剩余的字符串，我进行了统计量获取，每个统计量背后都有一个假设，这个假设用于说明这个字符串成词的概率高低。我使用了包括频数，词性，构词能力等在内的12个统计量，并将以上统计量作为一个候选新词的特征向量。关于这一步不做详细解释。<br>&#160; &#160; &#160; &#160;接下来获取完特征向量后，一般思想可以通过机器学习的方法判别，但是缺少已经标注的语料，因此，传统地，我使用了无监督的kmeans聚类和阈值的方法进行尝试，kmeans方法效果不好，但是阈值表现还可以。除此之外，我还采用了tri-training方法，这种方法基于协同训练，将少量人工标注的语料作为种子集合进行自扩展，在扩展的过程中不断完善分离器的泛化能力，进而获得表现较好的分类器，用于分类。这种算法相比前两种有效一些，但是种子基的数量不能太小，过小会导致原始分类器泛化能力太差，对后面扩展的种子不具有参考价值。<br>&#160; &#160; &#160; &#160;上面大概就是新词识别方法的介绍，为了实现一个自动的新词识别系统，我利用新浪微博作为语料来源，对新浪微博模拟浏览器登录然后每天定时爬取一定数量，并放入上述算法识别，识别结果结合人工干扰模式，进而保证发现的准确率并扩充词典。<br>&#160; &#160; &#160; &#160;大概一个完整的思路就是酱紫，嗯。。。</p>
-  
+		  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/mini-project/">mini_project</a>
+  <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/algorithm/">algorithm</a><a href="/tags/machine-learning/">machine learning</a>
+  <span></span> <a href="/tags/object-Object/">[object Object]</a>
   </div>
 
 </div>
@@ -140,7 +123,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://eilene.github.io/2016/08/08/newword-identification/" data-title="newword identification | Eilene&#39;s blog" data-tsina="undefined" class="share clearfix">
+	  <div data-url="http://eilene.github.io/2016/07/08/banditlearning/" data-title="bandit learning | Eilene&#39;s blog" data-tsina="undefined" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -154,18 +137,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/08/08/note/" title="笔记">
+ <a href="/2016/07/08/最长上升子序列/" title="最长上升子序列">
   <strong>上一篇：</strong><br/>
   <span>
-  笔记</span>
+  最长上升子序列</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/08/08/隐马尔可夫/"  title="隐马尔可夫">
+<a href="/2016/04/09/说坐就坐的夜间火车-md/"  title="说坐就坐的夜间火车">
  <strong>下一篇：</strong><br/> 
- <span>隐马尔可夫
+ <span>说坐就坐的夜间火车
 </span>
 </a>
 </div>
@@ -174,7 +157,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/08/08/newword-identification/" data-title="newword identification" data-url="http://eilene.github.io/2016/08/08/newword-identification/"></div>
+	<div class="ds-thread" data-thread-key="2016/07/08/banditlearning/" data-title="bandit learning" data-url="http://eilene.github.io/2016/07/08/banditlearning/"></div>
 </section>
 
 
@@ -184,7 +167,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#newword-identification"><span class="toc-number">1.</span> <span class="toc-text">newword identification</span></a></li></ol>
+ 
  
   </div>
 
