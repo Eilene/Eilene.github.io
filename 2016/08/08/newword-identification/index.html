@@ -1,0 +1,525 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>newword identification | Eilene&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="xubingbing">
+    
+
+    
+    <meta name="description" content="newword identification
+
+通过查阅论文结合自己的想法实现了下大规模微博语料中的新词识别
+
+&amp;#160; &amp;#160; &amp;#160; &amp;#160;最近大概了解了下新词识别方面的知识，然后增加了一些自己的思路，做了简单的实现，下面大概说明一下。新词识别，目的即为从大规模数据中发现新词，即未在词典中登录的词语，一般思路都是先找到候选字符串，然后判别这些字符串是否为新词。但是在以上两">
+<meta property="og:type" content="article">
+<meta property="og:title" content="newword identification">
+<meta property="og:url" content="http://eilene.github.io/2016/08/08/newword-identification/index.html">
+<meta property="og:site_name" content="Eilene's blog">
+<meta property="og:description" content="newword identification
+
+通过查阅论文结合自己的想法实现了下大规模微博语料中的新词识别
+
+&amp;#160; &amp;#160; &amp;#160; &amp;#160;最近大概了解了下新词识别方面的知识，然后增加了一些自己的思路，做了简单的实现，下面大概说明一下。新词识别，目的即为从大规模数据中发现新词，即未在词典中登录的词语，一般思路都是先找到候选字符串，然后判别这些字符串是否为新词。但是在以上两">
+<meta property="og:updated_time" content="2016-08-08T15:41:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="newword identification">
+<meta name="twitter:description" content="newword identification
+
+通过查阅论文结合自己的想法实现了下大规模微博语料中的新词识别
+
+&amp;#160; &amp;#160; &amp;#160; &amp;#160;最近大概了解了下新词识别方面的知识，然后增加了一些自己的思路，做了简单的实现，下面大概说明一下。新词识别，目的即为从大规模数据中发现新词，即未在词典中登录的词语，一般思路都是先找到候选字符串，然后判别这些字符串是否为新词。但是在以上两">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Eilene&#39;s blog" title="Eilene&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Eilene&#39;s blog">Eilene&#39;s blog</a></h1>
+				<h2 class="blog-motto">keep trying</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/index">索引 | Index</a></li>
+					
+						<li><a href="/archives">归档 | Archives</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:eilene.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/08/newword-identification/" title="newword identification" itemprop="url">newword identification</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="xubingbing" target="_blank" itemprop="author">xubingbing</a>
+		
+  <p class="article-time">
+    <time datetime="2016-08-08T15:34:19.000Z" itemprop="datePublished"> 发表于 2016-08-08</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#newword-identification"><span class="toc-number">1.</span> <span class="toc-text">newword identification</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="newword-identification"><a href="#newword-identification" class="headerlink" title="newword identification"></a>newword identification</h2><hr>
+<blockquote>
+<p>通过查阅论文结合自己的想法实现了下大规模微博语料中的新词识别</p>
+</blockquote>
+<p>&#160; &#160; &#160; &#160;最近大概了解了下新词识别方面的知识，然后增加了一些自己的思路，做了简单的实现，下面大概说明一下。<br>新词识别，目的即为从大规模数据中发现新词，即未在词典中登录的词语，一般思路都是先找到候选字符串，然后判别这些字符串是否为新词。但是在以上两个步骤的具体实现中，实用的方法却各有千秋。<br>&#160; &#160; &#160; &#160;候选字符串提取包括n元递增算法，ngram算法以及指定模式提取。关于ngram算法我并没有尝试，并且我对ngram了解不多，所以这里不做过多说明。我首先尝试了n元递增算法，直白点讲，这种算法提取了语料中所有长度为2-n的字符串，可想而知，这种算法提取到的字符串是海量的，尤其是当提取字符串长度增加，提取到的数量大幅度增加，同时，这种方法提取到的字符串因为没有考虑到任何规律性之类的内容，大部分都为垃圾串。鉴于以上，我尝试了另一种算法：先对语料进行分词，然后从分词结果中提取指定模式的字符串。分词是基于词典的，词典的不完备导致分词结果不准确，但是观察发现，新词以散列字符的形式呈现在结果中，因此从结果中提取1+1，1+1+1，1+1+1 和2+1，3+1模式的字符串，这样处理，字符串的数量肯定还是巨大的，但是相比上一种算法来说，数量有了很大的减少。<br>&#160; &#160; &#160; &#160;提取完字符串后，便要判别字符串是否为新词，我将之前论文和博客中的方法做了个整合，我首先对字符串进行过滤，过滤包括频数过滤，词典过滤，子串过滤及停用词表过滤。其中停用词表过滤是指自己依赖于单字符构词模式和构词能力构造的词首停用词表，词尾停用词表等。过滤后针对剩余的字符串，我进行了统计量获取，每个统计量背后都有一个假设，这个假设用于说明这个字符串成词的概率高低。我使用了包括频数，词性，构词能力等在内的12个统计量，并将以上统计量作为一个候选新词的特征向量。关于这一步不做详细解释。<br>&#160; &#160; &#160; &#160;接下来获取完特征向量后，一般思想可以通过机器学习的方法判别，但是缺少已经标注的语料，因此，传统地，我使用了无监督的kmeans聚类和阈值的方法进行尝试，kmeans方法效果不好，但是阈值表现还可以。除此之外，我还采用了tri-training方法，这种方法基于协同训练，将少量人工标注的语料作为种子集合进行自扩展，在扩展的过程中不断完善分离器的泛化能力，进而获得表现较好的分类器，用于分类。这种算法相比前两种有效一些，但是种子基的数量不能太小，过小会导致原始分类器泛化能力太差，对后面扩展的种子不具有参考价值。<br>&#160; &#160; &#160; &#160;上面大概就是新词识别方法的介绍，为了实现一个自动的新词识别系统，我利用新浪微博作为语料来源，对新浪微博模拟浏览器登录然后每天定时爬取一定数量，并放入上述算法识别，识别结果结合人工干扰模式，进而保证发现的准确率并扩充词典。<br>&#160; &#160; &#160; &#160;大概一个完整的思路就是酱紫，嗯。。。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/mini-project/">mini_project</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/algorithm/">algorithm</a><a href="/tags/machine-learning/">machine learning</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://eilene.github.io/2016/08/08/newword-identification/" data-title="newword identification | Eilene&#39;s blog" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/08/08/guess-number-higher-or-lower/" title="guess number higher or lower">
+  <strong>上一篇：</strong><br/>
+  <span>
+  guess number higher or lower</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/08/08/隐马尔可夫/"  title="隐马尔可夫">
+ <strong>下一篇：</strong><br/> 
+ <span>隐马尔可夫
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/08/08/newword-identification/" data-title="newword identification" data-url="http://eilene.github.io/2016/08/08/newword-identification/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#newword-identification"><span class="toc-number">1.</span> <span class="toc-text">newword identification</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/algorithm/" title="algorithm">algorithm<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/life/" title="life">life<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mini-project/" title="mini_project">mini_project<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/读书看剧笔记/" title="读书看剧笔记">读书看剧笔记<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/algorithm/" title="algorithm">algorithm<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/读书笔记/" title="读书笔记">读书笔记<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/my-life/" title="my life">my life<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/machine-learning/" title="machine learning">machine learning<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HMM/" title="HMM">HMM<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/HMM/" style="font-size: 10px;">HMM</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/my-life/" style="font-size: 10px;">my life</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
+    </div>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://nphard.me" target="_blank" title="hard&#39;s Blog">hard&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Eilene. <br/>
+			Stay hungary,Stay Foolish.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/Eilene" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:sdxb001@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="xubingbing">xubingbing</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"eilene"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
