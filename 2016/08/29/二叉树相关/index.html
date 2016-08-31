@@ -1,0 +1,523 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>二叉树相关 | Eilene&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="xubingbing">
+    
+
+    
+    <meta name="description" content="如果数据集是普通的顺序存储，即整个数据表无序存储。那么插入操作就是放在表的末端，表元素个数加1即可。删除操作可以是删除后，后面的元素前移。或者是待删除元素与末尾元素互换，同时表元素个数减一。但是表无序造成的查找效率很低。如果查找的数据表是有序线性表，并且是顺序存储的，查找可以用折半，插值等算法实现，但是因为数据表有序，导致插入和删除操作，需要消耗大量的时间。那么我们希望找到一种数据结构，可以使得插">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树相关">
+<meta property="og:url" content="http://eilene.github.io/2016/08/29/二叉树相关/index.html">
+<meta property="og:site_name" content="Eilene's blog">
+<meta property="og:description" content="如果数据集是普通的顺序存储，即整个数据表无序存储。那么插入操作就是放在表的末端，表元素个数加1即可。删除操作可以是删除后，后面的元素前移。或者是待删除元素与末尾元素互换，同时表元素个数减一。但是表无序造成的查找效率很低。如果查找的数据表是有序线性表，并且是顺序存储的，查找可以用折半，插值等算法实现，但是因为数据表有序，导致插入和删除操作，需要消耗大量的时间。那么我们希望找到一种数据结构，可以使得插">
+<meta property="og:updated_time" content="2016-08-31T14:08:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二叉树相关">
+<meta name="twitter:description" content="如果数据集是普通的顺序存储，即整个数据表无序存储。那么插入操作就是放在表的末端，表元素个数加1即可。删除操作可以是删除后，后面的元素前移。或者是待删除元素与末尾元素互换，同时表元素个数减一。但是表无序造成的查找效率很低。如果查找的数据表是有序线性表，并且是顺序存储的，查找可以用折半，插值等算法实现，但是因为数据表有序，导致插入和删除操作，需要消耗大量的时间。那么我们希望找到一种数据结构，可以使得插">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Eilene&#39;s blog" title="Eilene&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Eilene&#39;s blog">Eilene&#39;s blog</a></h1>
+				<h2 class="blog-motto">keep trying</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/index">索引 | Index</a></li>
+					
+						<li><a href="/archives">归档 | Archives</a></li>
+					
+					<li>
+
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 5803264081506813238## e.g. &quot;783281470518440642&quot;  for your baidu search id ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+
+					
+					</li>
+				</ul>
+			</nav>		
+
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/29/二叉树相关/" title="二叉树相关" itemprop="url">二叉树相关</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="xubingbing" target="_blank" itemprop="author">xubingbing</a>
+		
+  <p class="article-time">
+    <time datetime="2016-08-29T03:23:51.000Z" itemprop="datePublished"> 发表于 2016-08-29</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>如果数据集是普通的顺序存储，即整个数据表无序存储。那么插入操作就是放在表的末端，表元素个数加1即可。删除操作可以是删除后，后面的元素前移。或者是待删除元素与末尾元素互换，同时表元素个数减一。但是表无序造成的查找效率很低。<br>如果查找的数据表是有序线性表，并且是顺序存储的，查找可以用折半，插值等算法实现，但是因为数据表有序，导致插入和删除操作，需要消耗大量的时间。<br>那么我们希望找到一种数据结构，可以使得插入和删除效率不错，同时可以满足高效率的查找操作。<br>二叉排序树就可以满足这个要求，二叉排序树又称为二叉查找树，它或者是一棵空树，或者满足下列性质：<br>1.若它的左子树不空，则左子树所有节点的值均小于根节点的值。<br>2.若它的右子树不空，则右子树所有节点的值均大于根节点的值。<br>3.它的左右子树也分别是二叉排序树。<br>二叉排序树非线性的结构，有利于插入和删除的实现。当对它进行中序遍历时，就可以得到有序的序列。<br>为了详细说明二叉树，我们先提供一个二叉树的结构。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> BiTNode</div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> data;</div><div class="line">	<span class="keyword">struct</span> BiTNode *lchild,*rchild;</div><div class="line">&#125;BiTNode,*BiTree;</div></pre></td></tr></table></figure></p>
+<p>这种用法的意思是给struct BitNode取别名位BitNode，给struct BitNode *取别名为BitTree，所以BitTree声明的变量是一个指针。<br>下面来说明下二叉排序树的查找的实现：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function">Status <span class="title">SearchBst</span><span class="params">(BiTree T,<span class="keyword">int</span> key,BiTree f,BiTree *p)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(!T)&#123;</div><div class="line">		<span class="comment">/*查找不成功*/</span></div><div class="line">		*p = f;</div><div class="line">		<span class="keyword">return</span> FALSE;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(key = T-&gt;data)</div><div class="line">	&#123;</div><div class="line">		*p = T;</div><div class="line">		<span class="keyword">return</span> TRUE;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(key&lt;T-&gt;data)</div><div class="line">		<span class="keyword">return</span> SearchBST(T-&gt;lchild,key,T,p);</div><div class="line">	<span class="keyword">else</span></div><div class="line">		<span class="keyword">return</span> SearchBST(T-&gt;rchild,key,T,p);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>SearchBST函数是一个可递归运行的函数，key代表要查找的关键字，二叉树f指向T的双亲，当T指向根节点时，f的初值就为NULL,它在递归时有用，最后的参数p是为了查找成功后可以得到查找到的结点位置。<br>二叉排序树的插入操作需要借助查找操作，插入就是将关键字放到树中的合适位置。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function">Status <span class="title">InsertBST</span><span class="params">(BiTree *T ,<span class="keyword">int</span> key)</span></span></div><div class="line">&#123;</div><div class="line">	BiTree p,s;</div><div class="line">	<span class="keyword">if</span>(!SearchBST(*T,key,<span class="literal">NULL</span>,&amp;p))</div><div class="line">	&#123;</div><div class="line">		s = （BiTree）<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTnode));</div><div class="line">		s-&gt;data = key;</div><div class="line">		s-&gt;lchild = s-&gt;rchild = <span class="literal">NULL</span>;</div><div class="line">		<span class="keyword">if</span>(!p)<span class="comment">//树为空</span></div><div class="line">		&#123;</div><div class="line">			*T = s;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(key&lt;p-&gt;data)&#123;</div><div class="line">		p-&gt;lchild = s;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			p-&gt;rchild = s;</div><div class="line">		<span class="keyword">return</span> TRUE;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> FALSE;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>二叉树的构建就是利用循环逐步插入节点生成二叉排序树。<br>二叉树对于插入和查找都很方便，但是为了满足二叉树节点删除后，仍满足二叉树的特性，因此删除节点需要考虑多种情况。<br>1.删除叶子节点。删除叶子节点对整棵树的其它节点结构没有影响，直接删除即可。<br>2.要删除的节点只有左子树或者右子树的情况，将节点删除后，将它的左子树或者右子树整个移动到删除节点的位置。<br>3.对于要删除的节点，既有左子树也有右子树的情况，可以找一个节点代替被删除节点的位置。当该节点是与被删除节点大小最相近的节点时，整个树结构不改变。即该节点可以是待删除节点左子树的最右节点，或者是右子树的最左节点。也同样是中序遍历中与删除节点相邻的节点。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function">Status <span class="title">DeleteBST</span><span class="params">(BiTree *T ,<span class="keyword">int</span> key)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(!*T)</div><div class="line">		<span class="keyword">return</span> FALSE;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(key == (*T)-&gt;data)</div><div class="line">			<span class="keyword">return</span> Delete(T);</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(key &lt; (*T)-&gt;data)</div><div class="line">			<span class="keyword">return</span> DeleteBST(&amp; (*T)-&gt;lchild,key);</div><div class="line">		<span class="keyword">else</span></div><div class="line">			<span class="keyword">return</span> DeleteBST(&amp;(*T)-&gt;rchild,key);</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="function">status <span class="title">Delete</span><span class="params">(BiTree *p)</span></span></div><div class="line">&#123;</div><div class="line">	BiTree q,s;</div><div class="line">	<span class="keyword">if</span>((*p)-&gt;rchild == <span class="literal">NULL</span>)</div><div class="line">	&#123;</div><div class="line">		q = *p;</div><div class="line">		*p = (*p)-&gt;lchild;</div><div class="line">		<span class="built_in">free</span>(q); </div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span>((*p)-&gt;lchild == <span class="literal">NULL</span>)</div><div class="line">	&#123;</div><div class="line">		q = *p;</div><div class="line">		*p = (*p)-&gt;rchild;</div><div class="line">		<span class="built_in">free</span>(q);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		q = *p;</div><div class="line">		s = (*p) -&gt;lchild;</div><div class="line">		<span class="keyword">while</span>(s-&gt;rchild)</div><div class="line">		&#123;</div><div class="line">			q =s;</div><div class="line">			s = s-&gt;rchild;</div><div class="line">		&#125;	</div><div class="line">		(*p)-&gt;data = s-&gt;data;</div><div class="line">		<span class="keyword">if</span>(q!=*p)</div><div class="line">			q-&gt;rchild = s-&gt;lchild;</div><div class="line">		<span class="keyword">else</span><span class="comment">//p的左孩子没有右孩子</span></div><div class="line">			q-&gt;lchild = s-&gt;lchild;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>二叉排序树以链接形式存储，在插入和删除过程中，不需要移动元素，只要修改链接指针即可。对于查找来说，走的就是从根节点到要查找的节点的路径，比较次数等于节点在树中的层数。因此降低二叉树的深度有利于查找节点。也就是将二叉树构建成平衡二叉树。<br>平衡二叉树是二叉排序树的一种，其中每个节点的左子树和右子树的高度差至多等于1.空树也是平衡二叉树的一种。二叉树节点的左子树深度减去右子树深度的值称为平衡因子bf。若bf&gt;1，则二叉树不平衡。<br>距离插入节点最近的，且平衡因子的绝对值大于1的节点为根的子树，为最小不平衡子树。平衡二叉树构建的基本思想就是在构建二叉排序树的过程中，每插入一个节点时，先检查是否因为插入节点而破坏了树的平衡性，若是，则找出最小不平衡子树，在保持二叉排序树特性的前提下，调整最小不平衡子树各节点的链接关系，进行相应的旋转，使之成为新的平衡子树。<br>平衡二叉树相对于二叉排序树，需要增加bf，用于存储平衡因子。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> BiTNode</div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> data;</div><div class="line">	<span class="keyword">struct</span> BiTNode *lchild,*rchild;</div><div class="line">	<span class="keyword">int</span> bf;</div><div class="line">&#125;BiTNode,*BiTree;</div></pre></td></tr></table></figure></p>
+<p>平衡二叉树，就是在二叉排序树的创建过程中保持它的平衡性，一旦有不平衡的情况，马上处理，当一个节点的bf为正时，进行右旋操作，为负时，进行左旋操作。当该节点与其子节点bf值符号不一致时，先处理子节点。<br>右旋操作代码如下,其中p是指要右旋处理的树的根节点：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">R_Rotate</span><span class="params">(BiTree *p)</span></span></div><div class="line">&#123;</div><div class="line">	BiTree L;</div><div class="line">	L = (*p) -&gt;lchild;</div><div class="line">	(*p)-&gt;lchild = L-&gt;rchild;</div><div class="line">	L-&gt;rchild = (*p);</div><div class="line">	*p = L;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>左旋操作和右旋操作对称，代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">L_Rotata</span><span class="params">(BiTree *p)</span></span></div><div class="line">&#123;</div><div class="line">	BiTree R;</div><div class="line">	R = (*p)-&gt;rchild;</div><div class="line">	(*p) -&gt;rchile = R-&gt;lchild;</div><div class="line">	R-&gt;lchild = (*p);</div><div class="line">	*p = R;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面是左平衡旋转处理的代码，也就是当T节点已经不平衡的时候，并且是左边的高于右边的进行处理的代码。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LH +1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> EH 0</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> RH -1</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">LeftBalance</span><span class="params">(BiTree *T)</span></span></div><div class="line">&#123;</div><div class="line">	BiTree L,Lr;</div><div class="line">	L = (*T)-&gt;lchild;</div><div class="line">	<span class="keyword">switch</span>(L-&gt;bf)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">case</span> LH:<span class="comment">//新节点插入在T的左孩子的左子树上，双旋</span></div><div class="line">			(*T)-&gt;bf = L-&gt;bf = EH;</div><div class="line">			R_Rotate(T);</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> RH:<span class="comment">//新节点插入在T的左孩子的右子树上，双旋</span></div><div class="line">			Lr = L-&gt;rchild;<span class="comment">/*Lr指向T的左孩子的右子树根*/</span></div><div class="line">			<span class="keyword">switch</span>(Lr-&gt;bf)</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">case</span> LH:</div><div class="line">				(*T)-&gt;bf = RH;</div><div class="line">				L-&gt;bf = EH;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">				<span class="keyword">case</span> EH:</div><div class="line">				(*T)-&gt;br = L-&gt;br = EH;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">				<span class="keyword">case</span> RH:</div><div class="line">				(*T)-&gt;bf = EH;</div><div class="line">				L-&gt;bf = LH;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			Lr-&gt;bf = EH;</div><div class="line">			L-&gt;Rotate(&amp;(*T)-&gt;lchild);</div><div class="line">			R_Rotate(T);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>右平衡处理类似于左平衡处理。<br>下面是主函数：<br>Status InsertAVL(BiTree <em>T,int e,Status </em>taller)<br>{<br>    if(!<em>T)<br>    {
+        </em>T = (BiTree)malloc(sizeof(BiTNode));<br>        (<em>T)-&gt;data = e;<br>        (</em>T)-&gt;lchild = (<em>T)-&gt;rchild = NULL;<br>        (</em>T)-&gt;bf=EH;<br>        <em>taller = TRUE;<br>    }<br>    else<br>    {<br>        if(e==(</em>T)-&gt;data)<br>        {<br>            <em>taller = FALSE;<br>            return FALSE;<br>        }<br>        if(e&lt;(</em>T)-&gt;data)<br>        {<br>            if(!InsertAVL(&amp;(<em>T)-&gt;lchild,e,taller))<br>                return FALSE;<br>            if(</em>taller)<br>            {<br>                switch((<em>T)-&gt;bf)<br>                {<br>                case LH:<br>                    LeftBalance(T);
+                    </em>taller = FALSE;<br>                    break;<br>                case EH:<br>                    (<em>T)-&gt;bf=LH;
+                    </em>taller = TRUE;<br>                    break;<br>                case RH:<br>                    (<em>T)-&gt;bf = EH;
+                    </em>taller = FALSE;<br>                    break;<br>                }<br>            }<br>        }<br>        else<br>        {<br>            if(!InsertAVL(&amp;(<em>T)-&gt;rchild,e,taller))<br>                return FALSE;<br>            if(</em>taller)<br>            {<br>                switch((<em>T)-&gt;bf)<br>                {<br>                    case LH:<br>                        (</em>T)-&gt;bf = EH;<br>                        <em>taller = FALSE;<br>                        break;<br>                    case EH:<br>                        (</em>T)-&gt;bf = RH;<br>                        <em>taller = TRUE;<br>                        break;<br>                    case RH:<br>                        RightBalance(T);
+                        </em>taller = FASLE;<br>                        break;<br>                }<br>            }<br>        }<br>    }<br>    return TRUE;<br>}<br>```<br>不平衡的二叉树查找效率较低，而平衡二叉树插入删除和查找的时间复杂度O(logn)。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/data-structure/">data structure</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/object-Object/">[object Object]</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://eilene.github.io/2016/08/29/二叉树相关/" data-title="二叉树相关 | Eilene&#39;s blog" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/08/08/note/"  title="笔记">
+ <strong>下一篇：</strong><br/> 
+ <span>笔记
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/08/29/二叉树相关/" data-title="二叉树相关" data-url="http://eilene.github.io/2016/08/29/二叉树相关/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/algorithm/" title="algorithm">algorithm<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/data-structure/" title="data structure">data structure<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/life/" title="life">life<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mini-project/" title="mini_project">mini_project<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/散记/" title="散记">散记<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/读书看剧笔记/" title="读书看剧笔记">读书看剧笔记<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/algorithm/" title="algorithm">algorithm<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/object-Object/" title="[object Object]">[object Object]<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/散记/" title="散记">散记<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/machine-learning/" title="machine learning">machine learning<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/读书笔记/" title="读书笔记">读书笔记<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HMM/" title="HMM">HMM<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/my-life/" title="my life">my life<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/HMM/" style="font-size: 10px;">HMM</a> <a href="/tags/object-Object/" style="font-size: 15px;">[object Object]</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/my-life/" style="font-size: 10px;">my life</a> <a href="/tags/散记/" style="font-size: 10px;">散记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
+    </div>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://nphard.me" target="_blank" title="hard&#39;s Blog">hard&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Eilene. <br/>
+			Stay hungary,Stay Foolish.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/Eilene" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:sdxb001@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="xubingbing">xubingbing</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"eilene"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
