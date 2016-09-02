@@ -23,7 +23,7 @@
 在抽取样本之前，你们对所要估计的未知参数所了解的信息，称为先验信息，对未知参数的先验信息用一个分布形式如果以后有新增的观测值，后验分布又可作为先验分布来进行计算。具体来讲，在某一个时间点，有一个观测值，此时可以得到后验，之后，每一个观测值的到来，都以之前的后验作为先验，乘以似然函数后，得到修正后的新后验。
 回调函数
 当一个函数中的参数有函数时，这个函数可能是回调函数，回调函数的">
-<meta property="og:updated_time" content="2016-09-02T10:28:08.000Z">
+<meta property="og:updated_time" content="2016-09-02T10:30:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记">
 <meta name="twitter:description" content="后验分布和先验分布
@@ -114,8 +114,9 @@
 <p>在抽取样本之前，你们对所要估计的未知参数所了解的信息，称为先验信息，对未知参数的先验信息用一个分布形式<br>如果以后有新增的观测值，后验分布又可作为先验分布来进行计算。具体来讲，在某一个时间点，有一个观测值，此时可以得到后验，之后，每一个观测值的到来，都以之前的后验作为先验，乘以似然函数后，得到修正后的新后验。</p>
 <h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><hr>
 <p>当一个函数中的参数有函数时，这个函数可能是回调函数，回调函数的意思是自己执行完后，执行成功则执行回调函数，回调函数异步非阻塞</p>
-<h2 id="柔性数组"><a href="#柔性数组" class="headerlink" title="柔性数组"></a>柔性数组</h2><p>柔性数组是数组大小待定的数组，c语言结构体的最后一个元素可以是大小未知的数组。<br>typedef struct node<br>{<br>    int value;<br>    struct node *next[1];</p>
-<p>}Node;<br>后继指针数组就是一个柔性数组，其中next数组的大小待定，因此可以实现结构体变长，<br>Node <em>p = ((Node</em>)malloc(sizeof(Node)+n<em>sizeof(Node</em>))),这个样子，那么next数组的大小就是n+1<br>也就是说p指向的空间包含一个value，和n+1个node指针的大小。</p>
+<h2 id="柔性数组"><a href="#柔性数组" class="headerlink" title="柔性数组"></a>柔性数组</h2><hr>
+<p>柔性数组是数组大小待定的数组，c语言结构体的最后一个元素可以是大小未知的数组。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> node</div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> value;</div><div class="line">    <span class="keyword">struct</span> node *next[<span class="number">1</span>];</div><div class="line">    </div><div class="line">&#125;Node;</div></pre></td></tr></table></figure></p>
+<p>后继指针数组就是一个柔性数组，其中next数组的大小待定，因此可以实现结构体变长，<br>Node <em>p = ((Node</em>)malloc(sizeof(Node)+n<em>sizeof(Node</em>))),这个样子，那么next数组的大小就是n+1<br>也就是说p指向的空间包含一个value，和n+1个node指针的大小。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -245,11 +246,11 @@
 			
 		
 			
-				<li><a href="/tags/散记/" title="散记">散记<sup>1</sup></a></li>
+				<li><a href="/tags/machine-learning/" title="machine learning">machine learning<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/machine-learning/" title="machine learning">machine learning<sup>1</sup></a></li>
+				<li><a href="/tags/散记/" title="散记">散记<sup>1</sup></a></li>
 			
 		
 			
