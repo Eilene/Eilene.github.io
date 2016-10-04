@@ -15,7 +15,7 @@
 在游戏厅，有多臂老虎机游戏，但是摇动老虎机每个arm，获得的收益概率不同。在我们不知道每个arm收益的前提下，我们想在给定次数内通过转动arm，获取最大的收益。
 bandit learning应用场景：
 1 在企业中，算法工程师关于一个问题上线很多模型，想知道哪个模型更好。
-2 在广告展示中，需要知道给用户展示哪个广告，才能获得最大化收益？每次都挑当前效果">
+2 在广告展示中，需要知道给用户展示哪个广告，才能获得最大化收益？每次都挑当前效果最">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bandit learning">
 <meta property="og:url" content="http://eilene.github.io/2016/07/08/banditlearning/index.html">
@@ -24,15 +24,17 @@ bandit learning应用场景：
 在游戏厅，有多臂老虎机游戏，但是摇动老虎机每个arm，获得的收益概率不同。在我们不知道每个arm收益的前提下，我们想在给定次数内通过转动arm，获取最大的收益。
 bandit learning应用场景：
 1 在企业中，算法工程师关于一个问题上线很多模型，想知道哪个模型更好。
-2 在广告展示中，需要知道给用户展示哪个广告，才能获得最大化收益？每次都挑当前效果">
-<meta property="og:updated_time" content="2016-10-03T17:44:31.000Z">
+2 在广告展示中，需要知道给用户展示哪个广告，才能获得最大化收益？每次都挑当前效果最">
+<meta property="og:image" content="http://chart.googleapis.com/chart?cht=tx&chl=  \overline {X}_{j}\left( t\right)+{\sqrt {\frac {2*ln t} {T_{jt}}}  ">
+<meta property="og:updated_time" content="2016-10-04T01:55:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bandit learning">
 <meta name="twitter:description" content="bandit learning问题描述
 在游戏厅，有多臂老虎机游戏，但是摇动老虎机每个arm，获得的收益概率不同。在我们不知道每个arm收益的前提下，我们想在给定次数内通过转动arm，获取最大的收益。
 bandit learning应用场景：
 1 在企业中，算法工程师关于一个问题上线很多模型，想知道哪个模型更好。
-2 在广告展示中，需要知道给用户展示哪个广告，才能获得最大化收益？每次都挑当前效果">
+2 在广告展示中，需要知道给用户展示哪个广告，才能获得最大化收益？每次都挑当前效果最">
+<meta name="twitter:image" content="http://chart.googleapis.com/chart?cht=tx&chl=  \overline {X}_{j}\left( t\right)+{\sqrt {\frac {2*ln t} {T_{jt}}}  ">
 
     
     
@@ -109,12 +111,11 @@ bandit learning应用场景：
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning问题描述"><span class="toc-number">1.</span> <span class="toc-text">bandit learning问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning应用场景："><span class="toc-number">2.</span> <span class="toc-text">bandit learning应用场景：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning算法介绍："><span class="toc-number">3.</span> <span class="toc-text">bandit learning算法介绍：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#朴素随机方法："><span class="toc-number">3.1.</span> <span class="toc-text">朴素随机方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#e-greedy算法："><span class="toc-number">3.2.</span> <span class="toc-text">e-greedy算法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#softmax算法："><span class="toc-number">3.3.</span> <span class="toc-text">softmax算法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ucb1算法："><span class="toc-number">3.4.</span> <span class="toc-text">ucb1算法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning算法效果对比："><span class="toc-number">4.</span> <span class="toc-text">bandit learning算法效果对比：</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning问题描述"><span class="toc-number">1.</span> <span class="toc-text">bandit learning问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning应用场景："><span class="toc-number">2.</span> <span class="toc-text">bandit learning应用场景：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning算法介绍："><span class="toc-number">3.</span> <span class="toc-text">bandit learning算法介绍：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#完全随机方法："><span class="toc-number">3.1.</span> <span class="toc-text">完全随机方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#朴素随机方法："><span class="toc-number">3.2.</span> <span class="toc-text">朴素随机方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#e-greedy算法："><span class="toc-number">3.3.</span> <span class="toc-text">e-greedy算法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#softmax算法："><span class="toc-number">3.4.</span> <span class="toc-text">softmax算法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ucb1算法："><span class="toc-number">3.5.</span> <span class="toc-text">ucb1算法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning算法效果对比："><span class="toc-number">4.</span> <span class="toc-text">bandit learning算法效果对比：</span></a></li></ol>
 		
 		</div>
 		
-		<p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><br></script></p>
-<h2 id="bandit-learning问题描述"><a href="#bandit-learning问题描述" class="headerlink" title="bandit learning问题描述"></a>bandit learning问题描述</h2><hr>
+		<h2 id="bandit-learning问题描述"><a href="#bandit-learning问题描述" class="headerlink" title="bandit learning问题描述"></a>bandit learning问题描述</h2><hr>
 <p>在游戏厅，有多臂老虎机游戏，但是摇动老虎机每个arm，获得的收益概率不同。在我们不知道每个arm收益的前提下，我们想在给定次数内通过转动arm，获取最大的收益。</p>
 <h2 id="bandit-learning应用场景："><a href="#bandit-learning应用场景：" class="headerlink" title="bandit learning应用场景："></a>bandit learning应用场景：</h2><hr>
 <p><code>1 在企业中，算法工程师关于一个问题上线很多模型，想知道哪个模型更好。</code></p>
@@ -127,13 +128,18 @@ bandit learning应用场景：
 <blockquote>
 <p>bandit learning目的是解决每次摇臂的时候选择哪个arm，这篇文章中我们假设每个arm的收益背后服从一个高斯分布。我们先用下面几行代码随机生成每个arm的高斯分布。</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">C = <span class="number">10.0</span></div><div class="line">arm_num = <span class="number">8</span><span class="comment">#arm的个数</span></div><div class="line">arm_args = []<span class="comment">#存每个arm具体高斯分布</span></div><div class="line">ALL_TIMES = <span class="number">1000</span>＃共摇臂次数</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num):</div><div class="line">    arm_args.append((random()*C,random()*C))</div><div class="line">```bandit learning具体算法有很多种，下文给出几种经典方法的介绍和代码。</div><div class="line"><span class="comment">### 完全随机方法：</span></div><div class="line">&gt; 即每次对arm的选择完全不考虑先验知识，而是从所有arm中随机选择，代码如下：</div><div class="line"></div><div class="line">```python</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">try_arm_dive_times</span><span class="params">(all_times)</span>:</span></div><div class="line">    bandit = <span class="number">0.0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num):</div><div class="line">        arm_times = all_times / arm_num</div><div class="line">        <span class="keyword">if</span> i &lt;all_times % arm_num:</div><div class="line">            arm_times +=<span class="number">1</span></div><div class="line">        a,b = arm_args[i]</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(arm_times):</div><div class="line">            bandit += gauss(a,b)</div><div class="line">    <span class="keyword">return</span> bandit</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">C = <span class="number">10.0</span></div><div class="line">arm_num = <span class="number">8</span><span class="comment">#arm的个数</span></div><div class="line">arm_args = []<span class="comment">#存每个arm具体高斯分布</span></div><div class="line">ALL_TIMES = <span class="number">1000</span><span class="comment">#共摇臂次数</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num):</div><div class="line">    arm_args.append((random()*C,random()*C))</div></pre></td></tr></table></figure>
+<p>bandit learning具体算法有很多种，下文给出几种经典方法的介绍和代码。</p>
+<h3 id="完全随机方法："><a href="#完全随机方法：" class="headerlink" title="完全随机方法："></a>完全随机方法：</h3><blockquote>
+<p>即每次对arm的选择完全不考虑先验知识，而是从所有arm中随机选择，代码如下：</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">try_arm_dive_times</span><span class="params">(all_times)</span>:</span></div><div class="line">    bandit = <span class="number">0.0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num):</div><div class="line">        arm_times = all_times / arm_num</div><div class="line">        <span class="keyword">if</span> i &lt;all_times % arm_num:</div><div class="line">            arm_times +=<span class="number">1</span></div><div class="line">        a,b = arm_args[i]</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(arm_times):</div><div class="line">            bandit += gauss(a,b)</div><div class="line">    <span class="keyword">return</span> bandit</div></pre></td></tr></table></figure>
 <h3 id="朴素随机方法："><a href="#朴素随机方法：" class="headerlink" title="朴素随机方法："></a>朴素随机方法：</h3><blockquote>
 <p>根据上面的方法，每次都是随机乱猜固然是不可取的，这种方法相对上种有了一些改进，首先对每个arm尝试一次，然后接下来一直选择表现最好的arm摇动。代码如下：</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">try_arm_once_and_run_best</span><span class="params">(all_times)</span>:</span></div><div class="line">    bandit = <span class="number">0.0</span></div><div class="line">    best_pos = <span class="number">0</span></div><div class="line">    try_arrs = []</div><div class="line">    all_times = all_times - arm_num</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num):</div><div class="line">        try_arrs.append(gauss(arm_args[i][<span class="number">0</span>],arm_args[i][<span class="number">1</span>]))</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num):</div><div class="line">        <span class="keyword">if</span> try_arrs[i]&gt;try_arrs[best_pos]:</div><div class="line">            best_pos = i</div><div class="line">    a,b = arm_args[best_pos]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(all_times):</div><div class="line">        bandit += gauss(a,b)</div><div class="line">    <span class="keyword">return</span> bandit</div></pre></td></tr></table></figure>
 <h3 id="e-greedy算法："><a href="#e-greedy算法：" class="headerlink" title="e-greedy算法："></a>e-greedy算法：</h3><blockquote>
-<p>这个算法考虑到exploit和explore的分配，给定0-1之间的一个值e，代码每次生成一个0-1之间的随机数，如果该值小于e,则探索，在所有arm中随机选择一个，负责利用先验知识，选择所有arm中当前平均收益最大的arm，通过调整e的值可以调整探索和开发利用的比例，越接近0，则程序越保守，使用当前表现好的arm，通常e值取值较小。代码如下：</p>
+<p>这个算法考虑到exploit和explore的分配，给定0-1之间的一个值e，代码每次生成一个0-1之间的随机数，如果该值小于e,则探索，在所有arm中随机选择一个，否则利用先验知识，选择所有arm中当前平均收益最大的arm，通过调整e的值可以调整探索和开发利用的比例，越接近0，则程序越保守，使用当前表现好的arm，通常e值取值较小。代码如下：</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">e_greedy</span><span class="params">(all_times,e)</span>:</span></div><div class="line">    bandit = <span class="number">0.0</span></div><div class="line">    arms_bandit = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num)]</div><div class="line">    arms_count = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num)]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(all_times):</div><div class="line">        k = <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> random()&lt;e:</div><div class="line">            k = randint(<span class="number">0</span>,arm_num<span class="number">-1</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(arm_num):</div><div class="line">                <span class="keyword">if</span> arms_bandit[j] &gt; arms_bandit[k]:</div><div class="line">                    k = j</div><div class="line">        v = gauss(arm_args[k][<span class="number">0</span>],arm_args[k][<span class="number">1</span>])</div><div class="line">        bandit = bandit+v</div><div class="line">        arms_bandit[k] = (arms_bandit[k]*arms_count[k]+v)/(arms_count[k]+<span class="number">1</span>)</div><div class="line">        arms_count[k] = arms_count[k]+<span class="number">1</span></div><div class="line">    <span class="keyword">return</span> bandit</div></pre></td></tr></table></figure>
 <h3 id="softmax算法："><a href="#softmax算法：" class="headerlink" title="softmax算法："></a>softmax算法：</h3><blockquote>
@@ -141,11 +147,11 @@ bandit learning应用场景：
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">soft_max</span><span class="params">(all_times,r)</span>:</span></div><div class="line">    bandit = <span class="number">0.0</span></div><div class="line">    arms_bandit = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num)]</div><div class="line">    arms_count = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num)]</div><div class="line">    probs = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num)]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(all_times):</div><div class="line">        prob_sum = <span class="number">0.0</span></div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(arm_num):</div><div class="line">            probs[j] = math.pow(math.e,arms_bandit[j]/r)</div><div class="line">            prob_sum += probs[j]</div><div class="line">        k = <span class="number">0</span></div><div class="line">        sel_random = random() * prob_sum</div><div class="line">        sel_sum = <span class="number">0.0</span></div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(arm_num):</div><div class="line">            sel_sum += probs[j]</div><div class="line">            <span class="keyword">if</span> sel_sum &gt; sel_random:</div><div class="line">                k = j</div><div class="line">                <span class="keyword">break</span></div><div class="line">        v = gauss(arm_args[k][<span class="number">0</span>],arm_args[k][<span class="number">1</span>])</div><div class="line">        bandit += v</div><div class="line">        arms_bandit[k] = (arms_bandit[k]*arms_count[k]+v)/(arms_count[k]+<span class="number">1</span>)</div><div class="line">        arms_count[k] = arms_count[k]+<span class="number">1</span></div><div class="line">    <span class="keyword">return</span> bandit</div></pre></td></tr></table></figure>
 <h3 id="ucb1算法："><a href="#ucb1算法：" class="headerlink" title="ucb1算法："></a>ucb1算法：</h3><blockquote>
-<p>上面两种算法都需要进行参数配置，但是ucb1没有先验知识和条件。该算法首先对每个arm尝试一次，然后接下来每次选择下公式值最大的臂。<br>$$ \overline {X}<em>{j}\left( t\right) +\sqrt {\dfrac {2\ln t} {T</em>{jt}}} $$<br>其中前部分是这个臂到目前的收益均值，后一部分是均值的标准差，t是目前的试验次数，Tjt是这个臂被试次数。<br>这个公式反映：均值越大，标准差越小，被选中的概率会越来越大，起到了exploit的作用；同时哪些被选次数较少的臂也会得到试验机会，起到了explore的作用。代码如下：</p>
+<p>上面两种算法都需要进行参数配置，但是ucb1没有先验知识和条件。该算法首先对每个arm尝试一次，然后接下来每次选择下公式值最大的臂。<br><img src="http://chart.googleapis.com/chart?cht=tx&chl=  \overline {X}_{j}\left( t\right)+{\sqrt {\frac {2*ln t} {T_{jt}}}  " style="border:none;"><br>其中前部分是这个臂到目前的收益均值，后一部分是均值的标准差，t是目前的试验次数，Tjt是这个臂被试次数。<br>这个公式反映：均值越大，标准差越小，被选中的概率会越来越大，起到了exploit的作用；同时哪些被选次数较少的臂也会得到试验机会，起到了explore的作用。代码如下：</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">ucb1</span><span class="params">(all_times)</span>:</span></div><div class="line">    bandit = <span class="number">0.0</span></div><div class="line">    arms_bandit = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num)]</div><div class="line">    arms_count = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num)]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(arm_num):</div><div class="line">        v = gauss(arm_args[i][<span class="number">0</span>],arm_args[i][<span class="number">1</span>])</div><div class="line">        arms_bandit[i] = v</div><div class="line">        bandit += v</div><div class="line">        arms_count[i] = <span class="number">1</span></div><div class="line">        all_times -=<span class="number">1</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,all_times+<span class="number">1</span>):</div><div class="line">        k = <span class="number">0</span></div><div class="line">        m = <span class="number">-100000000</span></div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(arm_num):</div><div class="line">            tmp_ucb = arms_bandit[j] + math.sqrt(<span class="number">2.0</span>*math.log(i+arm_num)/arms_count[j])</div><div class="line">            <span class="keyword">if</span> tmp_ucb&gt;m:</div><div class="line">                k = j</div><div class="line">                m = tmp_ucb</div><div class="line">        v = gauss(arm_args[k][<span class="number">0</span>],arm_args[k][<span class="number">1</span>])</div><div class="line">        bandit = bandit + v</div><div class="line">        arms_bandit[k] = (arms_bandit[k]*arms_bandit[k]+v)/(arms_count[k]+<span class="number">1</span>)</div><div class="line">        arms_count[k] = arms_count[k]+<span class="number">1</span></div><div class="line">    <span class="keyword">return</span> bandit</div></pre></td></tr></table></figure>
 <h2 id="bandit-learning算法效果对比："><a href="#bandit-learning算法效果对比：" class="headerlink" title="bandit learning算法效果对比："></a>bandit learning算法效果对比：</h2><hr>
-<p>算法效果对比之前首先明确对比的指标，在多臂问题中使用累计遗憾定义，累计遗憾计算如下：<br>$$ R<em>{T}=\sum </em>{i=1}^{T}W<em>{opt}-W</em>{g}\left( t\right) $$<br>其中Wopt指每次选择最优的时候的收益，Wg(i)指第i次选择被选中的臂的期望收益。对于不用的bandit learning 算法，可以通过对比累积遗憾来衡量算法效果。<br>上述几个算法对比后发现，完全随机&lt;朴素随机&lt;e-greedy&lt;softmax&lt;ucb1</p>
+<p>算法效果对比之前首先明确对比的指标，在多臂问题中使用累计遗憾定义，累计遗憾计算如下：<br>$${\sum_{i=1}^T {W_o}-W_g\left( t\right)}$$<br>其中Wo指每次选择最优的时候的收益，Wg(i)指第i次选择被选中的臂的期望收益。对于不用的bandit learning 算法，可以通过对比累积遗憾来衡量算法效果。<br>上述几个算法对比后发现，完全随机&lt;朴素随机&lt;e-greedy&lt;softmax&lt;ucb1</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -182,18 +188,18 @@ bandit learning应用场景：
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/07/08/最长上升子序列/" title="最长上升子序列">
+ <a href="/2016/08/08/隐马尔可夫/" title="隐马尔可夫">
   <strong>上一篇：</strong><br/>
   <span>
-  最长上升子序列</span>
+  隐马尔可夫</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/04/09/说坐就坐的夜间火车-md/"  title="说坐就坐的夜间火车">
+<a href="/2016/07/08/最长上升子序列/"  title="最长上升子序列">
  <strong>下一篇：</strong><br/> 
- <span>说坐就坐的夜间火车
+ <span>最长上升子序列
 </span>
 </a>
 </div>
@@ -212,7 +218,7 @@ bandit learning应用场景：
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning问题描述"><span class="toc-number">1.</span> <span class="toc-text">bandit learning问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning应用场景："><span class="toc-number">2.</span> <span class="toc-text">bandit learning应用场景：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning算法介绍："><span class="toc-number">3.</span> <span class="toc-text">bandit learning算法介绍：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#朴素随机方法："><span class="toc-number">3.1.</span> <span class="toc-text">朴素随机方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#e-greedy算法："><span class="toc-number">3.2.</span> <span class="toc-text">e-greedy算法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#softmax算法："><span class="toc-number">3.3.</span> <span class="toc-text">softmax算法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ucb1算法："><span class="toc-number">3.4.</span> <span class="toc-text">ucb1算法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning算法效果对比："><span class="toc-number">4.</span> <span class="toc-text">bandit learning算法效果对比：</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning问题描述"><span class="toc-number">1.</span> <span class="toc-text">bandit learning问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning应用场景："><span class="toc-number">2.</span> <span class="toc-text">bandit learning应用场景：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning算法介绍："><span class="toc-number">3.</span> <span class="toc-text">bandit learning算法介绍：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#完全随机方法："><span class="toc-number">3.1.</span> <span class="toc-text">完全随机方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#朴素随机方法："><span class="toc-number">3.2.</span> <span class="toc-text">朴素随机方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#e-greedy算法："><span class="toc-number">3.3.</span> <span class="toc-text">e-greedy算法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#softmax算法："><span class="toc-number">3.4.</span> <span class="toc-text">softmax算法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ucb1算法："><span class="toc-number">3.5.</span> <span class="toc-text">ucb1算法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bandit-learning算法效果对比："><span class="toc-number">4.</span> <span class="toc-text">bandit learning算法效果对比：</span></a></li></ol>
  
   </div>
 
@@ -554,6 +560,35 @@ $(document).ready(function(){
 
 <!-- MathJax Begin -->
 <!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
 <!-- MathJax End -->
