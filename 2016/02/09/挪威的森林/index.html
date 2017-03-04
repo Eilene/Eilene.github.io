@@ -4,26 +4,29 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>guess number higher or lower | Eilene&#39;s blog</title>
+    <title>挪威的森林 | Eilene&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="xubingbing">
     
 
     
-    <meta name="description" content="题意介绍
-We are playing the Guess Game. The game is as follows:I pick a number from 1 to n. You have to guess which number I picked.Every time you guess wrong, I’ll tell you whether the number is higher o">
+    <meta name="description" content="挪威的森林：永远的青春读本。
+
+&amp;emsp;&amp;emsp;可惜我读的太晚了，已经过了18岁的青春才想起来读这本书。很喜欢里面的绿子，爱的纯粹张扬。下面摘抄一些很有感受的句子。&amp;emsp;&amp;emsp;少年时我们追求激情，成熟后却迷恋平庸，在我们寻找，伤害，背离之后，还能一如既往的相信爱情，这是一种勇气。每个人都有属于自己的一片森林，迷失的人迷失了，相逢的人会再相逢。&amp;emsp;&amp;emsp;哪里有人喜">
 <meta property="og:type" content="article">
-<meta property="og:title" content="guess number higher or lower">
-<meta property="og:url" content="http://eilene.github.io/2016/08/08/guess-number-higher-or-lower/index.html">
+<meta property="og:title" content="挪威的森林">
+<meta property="og:url" content="http://eilene.github.io/2016/02/09/挪威的森林/index.html">
 <meta property="og:site_name" content="Eilene's blog">
-<meta property="og:description" content="题意介绍
-We are playing the Guess Game. The game is as follows:I pick a number from 1 to n. You have to guess which number I picked.Every time you guess wrong, I’ll tell you whether the number is higher o">
-<meta property="og:updated_time" content="2017-03-04T11:34:08.000Z">
+<meta property="og:description" content="挪威的森林：永远的青春读本。
+
+&amp;emsp;&amp;emsp;可惜我读的太晚了，已经过了18岁的青春才想起来读这本书。很喜欢里面的绿子，爱的纯粹张扬。下面摘抄一些很有感受的句子。&amp;emsp;&amp;emsp;少年时我们追求激情，成熟后却迷恋平庸，在我们寻找，伤害，背离之后，还能一如既往的相信爱情，这是一种勇气。每个人都有属于自己的一片森林，迷失的人迷失了，相逢的人会再相逢。&amp;emsp;&amp;emsp;哪里有人喜">
+<meta property="og:updated_time" content="2017-03-04T11:50:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="guess number higher or lower">
-<meta name="twitter:description" content="题意介绍
-We are playing the Guess Game. The game is as follows:I pick a number from 1 to n. You have to guess which number I picked.Every time you guess wrong, I’ll tell you whether the number is higher o">
+<meta name="twitter:title" content="挪威的森林">
+<meta name="twitter:description" content="挪威的森林：永远的青春读本。
+
+&amp;emsp;&amp;emsp;可惜我读的太晚了，已经过了18岁的青春才想起来读这本书。很喜欢里面的绿子，爱的纯粹张扬。下面摘抄一些很有感受的句子。&amp;emsp;&amp;emsp;少年时我们追求激情，成熟后却迷恋平庸，在我们寻找，伤害，背离之后，还能一如既往的相信爱情，这是一种勇气。每个人都有属于自己的一片森林，迷失的人迷失了，相逢的人会再相逢。&amp;emsp;&amp;emsp;哪里有人喜">
 
     
     
@@ -84,14 +87,14 @@ We are playing the Guess Game. The game is as follows:I pick a number from 1 to 
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/08/08/guess-number-higher-or-lower/" title="guess number higher or lower" itemprop="url">guess number higher or lower</a>
+      <a href="/2016/02/09/挪威的森林/" title="挪威的森林" itemprop="url">挪威的森林</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="xubingbing" target="_blank" itemprop="author">xubingbing</a>
 		
   <p class="article-time">
-    <time datetime="2016-08-08T15:42:45.000Z" itemprop="datePublished"> 发表于 2016-08-08</time>
+    <time datetime="2016-02-08T16:19:38.000Z" itemprop="datePublished"> 发表于 2016-02-09</time>
     
   </p>
 </header>
@@ -100,33 +103,37 @@ We are playing the Guess Game. The game is as follows:I pick a number from 1 to 
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题意介绍"><span class="toc-number">1.</span> <span class="toc-text">题意介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码区"><span class="toc-number">2.</span> <span class="toc-text">代码区</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h2 id="题意介绍"><a href="#题意介绍" class="headerlink" title="题意介绍"></a>题意介绍</h2><hr>
-<p>We are playing the Guess Game. The game is as follows:<br>I pick a number from 1 to n. You have to guess which number I picked.<br>Every time you guess wrong, I’ll tell you whether the number is higher or lower.<br>You call a pre-defined API guess(int num) which returns 3 possible results (-1, 1, or 0):<br><code>-1 : My number is lower
- 1 : My number is higher
- 0 : Congrats! You got it!</code><br>Example<br><code>n = 10, I pick 6.
-Return 6.</code></p>
-<blockquote>
-<p>比较简单的题，用二分解决，但是有一个细节，导致多次才ac。<br>将lower+(higher-lower)/2写成(lower＋higher)/2,两个结果应该相同，但是会报错，timelimited<br>，大数出错，应该是溢出，用后一个公式可以有效减少上限</p>
+		<blockquote>
+<p>挪威的森林：永远的青春读本。</p>
 </blockquote>
-<h2 id="代码区"><a href="#代码区" class="headerlink" title="代码区"></a>代码区</h2><hr>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">guess</span><span class="params">(<span class="keyword">int</span> num)</span></span>;</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">guessNumber</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(guess(n)==<span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> n;</div><div class="line">        <span class="keyword">int</span> lower = <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> higher = n;</div><div class="line">        <span class="keyword">while</span>(lower&lt;higher)&#123;</div><div class="line">            <span class="keyword">int</span> temp = lower+(higher-lower)/<span class="number">2</span>;</div><div class="line">            <span class="keyword">int</span> t = guess(temp);</div><div class="line">            <span class="keyword">if</span>(t==<span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">return</span> temp;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(t==<span class="number">1</span>)</div><div class="line">                lower = temp;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                higher = temp;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> lower;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>  
+<p>&emsp;&emsp;可惜我读的太晚了，已经过了18岁的青春才想起来读这本书。<br>很喜欢里面的绿子，爱的纯粹张扬。下面摘抄一些很有感受的句子。<br>&emsp;&emsp;<br>少年时我们追求激情，成熟后却迷恋平庸，在我们寻找，伤害，背离之后，还能一如既往的相信爱情，这是一种勇气。每个人都有属于自己的一片森林，迷失的人迷失了，相逢的人会再相逢。<br>&emsp;&emsp;<br>哪里有人喜欢孤独，只不过不乱交朋友罢了，那样只能落得失望。<br>&emsp;&emsp;<br>“最最喜欢你，绿子。”<br>“什么程度？”<br>“像喜欢春天的熊一样。”<br>“春天的熊？”绿子再次扬起脸，“什么春天的熊？”<br>“春天的原野里，你一个人正走着，对面走来一只可爱的小熊，浑身的毛活像天鹅绒，眼睛圆鼓鼓的。它这么对你说到：‘你好，小姐，和我一块打滚玩好么？’接着，你就和小熊抱在一起，顺着长满三叶草的山坡咕噜咕噜滚下去，整整玩了一大天。你说棒不棒？” </p>
+<p>“太棒了。”<br>“我就这么喜欢你。”</p>
+<p>&emsp;&emsp;<br>“我真希望拥有真爱，哪怕一回都好” </p>
+<p>“你想要什么样的真爱呢？” </p>
+<p>“比方说吧，我跟你说我想吃草莓蛋糕，你就立刻丢下一切，跑去给我买，接着气喘吁吁地把蛋糕递给我，然后我说‘我现在不想要了’，于是你二话不说就把蛋糕丢出窗外，这，就是我说的真爱。” </p>
+<p>“我觉得这跟真爱一点关系都没有嘛” </p>
+<p>“有啊，我希望对方答道‘知道了，都是我的错，我真是头没脑子的蠢驴，我再去给你买别的，你想要什么？巧克力慕斯还是芝士蛋糕？’” </p>
+<p>“然后呢？” </p>
+<p>“然后我就好好爱他。”</p>
+<p>&emsp;&emsp;<br>正值青春年华的我们，总会一次次不知觉望向远方，对远方的道路充满憧憬，尽管忽隐忽现，充满迷茫。有时候身边就像被浓雾紧紧包围，那种迷茫和无助只有自己能懂。尽管有点孤独，尽管带着迷茫和无奈，但我依然勇敢地面对，因为这就是我的青春，不是别人的，只属于我的。</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  <a class="article-category-link" href="/categories/读书看剧笔记/">读书看剧笔记</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/algorithm/">algorithm</a>
+  <span></span> <a href="/tags/读书笔记/">读书笔记</a>
   </div>
 
 </div>
@@ -135,7 +142,7 @@ Return 6.</code></p>
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://eilene.github.io/2016/08/08/guess-number-higher-or-lower/" data-title="guess number higher or lower | Eilene&#39;s blog" data-tsina="undefined" class="share clearfix">
+	  <div data-url="http://eilene.github.io/2016/02/09/挪威的森林/" data-title="挪威的森林 | Eilene&#39;s blog" data-tsina="undefined" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -149,18 +156,18 @@ Return 6.</code></p>
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/08/29/二叉树相关/" title="二叉树相关">
+ <a href="/2016/04/03/sum-of-two-integers/" title="sum of two integers">
   <strong>上一篇：</strong><br/>
   <span>
-  二叉树相关</span>
+  sum of two integers</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/08/08/note/"  title="笔记">
+<a href="/2015/07/03/lptree/"  title="lptree">
  <strong>下一篇：</strong><br/> 
- <span>笔记
+ <span>lptree
 </span>
 </a>
 </div>
@@ -169,7 +176,7 @@ Return 6.</code></p>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/08/08/guess-number-higher-or-lower/" data-title="guess number higher or lower" data-url="http://eilene.github.io/2016/08/08/guess-number-higher-or-lower/"></div>
+	<div class="ds-thread" data-thread-key="2016/02/09/挪威的森林/" data-title="挪威的森林" data-url="http://eilene.github.io/2016/02/09/挪威的森林/"></div>
 </section>
 
 
@@ -179,7 +186,7 @@ Return 6.</code></p>
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题意介绍"><span class="toc-number">1.</span> <span class="toc-text">题意介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码区"><span class="toc-number">2.</span> <span class="toc-text">代码区</span></a></li></ol>
+ 
  
   </div>
 
