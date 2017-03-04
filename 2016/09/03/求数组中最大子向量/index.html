@@ -11,22 +11,19 @@
     
 
     
-    <meta name="description" content="##问题描述
-
-输入是具有n个浮点数的向量，输出是输入向量的任何连续子向量中的最大和。最简单的方法是对所有满足0=">
+    <meta name="description" content="问题描述
+输入是具有n个浮点数的向量，输出是输入向量的任何连续子向量中的最大和。最简单的方法是对所有满足i,j在0到n的的整数进行迭代，对每个整数对，程序计算data[i…j]的和，并检验总和是否大于迄今为止最大的总和。这种方法的复杂度为o(n^3),当n为100000时，要运行10天时间。那么为了优化这种代码，使用下面三种方法。1234567891011121314151617181920flo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="求数组中最大子向量">
 <meta property="og:url" content="http://eilene.github.io/2016/09/03/求数组中最大子向量/index.html">
 <meta property="og:site_name" content="Eilene's blog">
-<meta property="og:description" content="##问题描述
-
-输入是具有n个浮点数的向量，输出是输入向量的任何连续子向量中的最大和。最简单的方法是对所有满足0=">
-<meta property="og:updated_time" content="2016-09-03T09:59:52.000Z">
+<meta property="og:description" content="问题描述
+输入是具有n个浮点数的向量，输出是输入向量的任何连续子向量中的最大和。最简单的方法是对所有满足i,j在0到n的的整数进行迭代，对每个整数对，程序计算data[i…j]的和，并检验总和是否大于迄今为止最大的总和。这种方法的复杂度为o(n^3),当n为100000时，要运行10天时间。那么为了优化这种代码，使用下面三种方法。1234567891011121314151617181920flo">
+<meta property="og:updated_time" content="2017-03-04T12:09:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="求数组中最大子向量">
-<meta name="twitter:description" content="##问题描述
-
-输入是具有n个浮点数的向量，输出是输入向量的任何连续子向量中的最大和。最简单的方法是对所有满足0=">
+<meta name="twitter:description" content="问题描述
+输入是具有n个浮点数的向量，输出是输入向量的任何连续子向量中的最大和。最简单的方法是对所有满足i,j在0到n的的整数进行迭代，对每个整数对，程序计算data[i…j]的和，并检验总和是否大于迄今为止最大的总和。这种方法的复杂度为o(n^3),当n为100000时，要运行10天时间。那么为了优化这种代码，使用下面三种方法。1234567891011121314151617181920flo">
 
     
     
@@ -103,13 +100,12 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题描述"><span class="toc-number">1.</span> <span class="toc-text">问题描述</span></a></li></ol>
 		
 		</div>
 		
-		<p>##问题描述</p>
-<hr>
-<p>输入是具有n个浮点数的向量，输出是输入向量的任何连续子向量中的最大和。<br>最简单的方法是对所有满足0=<i=<j=<n的整数进行迭代，对每个整数对，程序计算data[i...j]的和，并检验总和是否大于迄今为止最大的总和。 这种方法的复杂度为o(n^3),当n为100000时，要运行10天时间。="" 那么为了优化这种代码，使用下面三种方法。="" <figure="" class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">float</span> <span class="title">maxsum1</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> u)</span><span class="comment">//时间复杂度o(n^2)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> sumarray[MAX_LENGTH];</div><div class="line">    sumarray[<span class="number">0</span>] = data[<span class="number">0</span>];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i =l;i&lt;=u;i++)</div><div class="line">    &#123;</div><div class="line">        sumarray[i] = sumarray[i<span class="number">-1</span>]+data[i];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> maxsum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = l;i&lt;=u;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=l;j&lt;=u;j++)</div><div class="line">        &#123;</div><div class="line">            sum = sumarray[j] - sumarray[i<span class="number">-1</span>];</div><div class="line">            maxsum = max(sum,maxsum);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> maxsum;</div><div class="line">&#125;</div></pre></td></tr></table></i=<j=<n的整数进行迭代，对每个整数对，程序计算data[i...j]的和，并检验总和是否大于迄今为止最大的总和。></p>
+		<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><hr>
+<p>输入是具有n个浮点数的向量，输出是输入向量的任何连续子向量中的最大和。<br>最简单的方法是对所有满足i,j在0到n的的整数进行迭代，对每个整数对，程序计算data[i…j]的和，并检验总和是否大于迄今为止最大的总和。<br>这种方法的复杂度为o(n^3),当n为100000时，要运行10天时间。<br>那么为了优化这种代码，使用下面三种方法。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">float</span> <span class="title">maxsum1</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> u)</span><span class="comment">//时间复杂度o(n^2)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> sumarray[MAX_LENGTH];</div><div class="line">    sumarray[<span class="number">0</span>] = data[<span class="number">0</span>];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i =l;i&lt;=u;i++)</div><div class="line">    &#123;</div><div class="line">        sumarray[i] = sumarray[i<span class="number">-1</span>]+data[i];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> maxsum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = l;i&lt;=u;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=l;j&lt;=u;j++)</div><div class="line">        &#123;</div><div class="line">            sum = sumarray[j] - sumarray[i<span class="number">-1</span>];</div><div class="line">            maxsum = max(sum,maxsum);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> maxsum;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">float</span> <span class="title">maxsum</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> u)</span><span class="comment">//时间复杂度o(nlogn)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(l&gt;u)</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span>(l==u)</div><div class="line">        <span class="keyword">return</span> max(<span class="number">0</span>,data[l]);</div><div class="line">    <span class="keyword">int</span> m =(l+u)/<span class="number">2</span>;</div><div class="line">    <span class="keyword">int</span> lmax = <span class="number">0</span>,rmax =<span class="number">0</span>, sum =<span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    <span class="keyword">for</span>(i=m;i&gt;=l;i--)</div><div class="line">    &#123;</div><div class="line">        sum = sum +data[i];</div><div class="line">        lmax = max(lmax,sum);</div><div class="line">    &#125;</div><div class="line">    sum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(i=m+<span class="number">1</span>;i&lt;=u;i++)</div><div class="line">    &#123;</div><div class="line">        sum = sum+data[i];</div><div class="line">        rmax = max(rmax,sum);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> temp =max(maxsum(l,m),maxsum(m+<span class="number">1</span>,u));</div><div class="line">    <span class="keyword">return</span> max(temp,lmax+rmax);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">float</span> <span class="title">maxsum2</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> u)</span><span class="comment">//时间复杂度o(n)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> maxsum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> maxendinghere =<span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i =l;i&lt;=u;i++)</div><div class="line">    &#123;</div><div class="line">        maxendinghere = max(maxendinghere+data[i],<span class="number">0</span>);</div><div class="line">        maxsum = max(maxsum,maxendinghere);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> maxsum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
   
@@ -178,7 +174,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题描述"><span class="toc-number">1.</span> <span class="toc-text">问题描述</span></a></li></ol>
  
   </div>
 
