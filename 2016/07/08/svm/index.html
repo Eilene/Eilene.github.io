@@ -1,0 +1,559 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>bandit learning | Eilene&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="xubingbing">
+    
+
+    
+    <meta name="description" content="SVM算法描述
+支持向量机是监督机器学习方法的一种，属于线性分类器一种。在数据线性可分的状况下，SVM在保证训练数据上分类正确的情况下，最大化分类间隔，使得模型的泛化能力更强，但数据无法线性可分时，模型为每个样本增加一个变量作为违背间隔的损失，最小化所有样本上的损失和最大化软间隔折中。SVM的分类边界只与支持向量有关。数据在低维空间线性不可分，但是映射到高维空间可能线性可分，使用映射函数S计算得到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bandit learning">
+<meta property="og:url" content="http://eilene.github.io/2016/07/08/svm/index.html">
+<meta property="og:site_name" content="Eilene's blog">
+<meta property="og:description" content="SVM算法描述
+支持向量机是监督机器学习方法的一种，属于线性分类器一种。在数据线性可分的状况下，SVM在保证训练数据上分类正确的情况下，最大化分类间隔，使得模型的泛化能力更强，但数据无法线性可分时，模型为每个样本增加一个变量作为违背间隔的损失，最小化所有样本上的损失和最大化软间隔折中。SVM的分类边界只与支持向量有关。数据在低维空间线性不可分，但是映射到高维空间可能线性可分，使用映射函数S计算得到">
+<meta property="og:updated_time" content="2017-03-04T11:25:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="bandit learning">
+<meta name="twitter:description" content="SVM算法描述
+支持向量机是监督机器学习方法的一种，属于线性分类器一种。在数据线性可分的状况下，SVM在保证训练数据上分类正确的情况下，最大化分类间隔，使得模型的泛化能力更强，但数据无法线性可分时，模型为每个样本增加一个变量作为违背间隔的损失，最小化所有样本上的损失和最大化软间隔折中。SVM的分类边界只与支持向量有关。数据在低维空间线性不可分，但是映射到高维空间可能线性可分，使用映射函数S计算得到">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Eilene&#39;s blog" title="Eilene&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Eilene&#39;s blog">Eilene&#39;s blog</a></h1>
+				<h2 class="blog-motto">keep trying</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/index">索引 | Index</a></li>
+					
+						<li><a href="/archives">归档 | Archives</a></li>
+					
+					<li>
+
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 5803264081506813238## e.g. &quot;783281470518440642&quot;  for your baidu search id ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+
+					
+					</li>
+				</ul>
+			</nav>		
+
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/08/svm/" title="bandit learning" itemprop="url">bandit learning</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="xubingbing" target="_blank" itemprop="author">xubingbing</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-08T15:42:45.000Z" itemprop="datePublished"> 发表于 2016-07-08</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SVM算法描述"><span class="toc-number">1.</span> <span class="toc-text">SVM算法描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SVM解法"><span class="toc-number">2.</span> <span class="toc-text">SVM解法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#示例"><span class="toc-number">3.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SVM源码"><span class="toc-number">4.</span> <span class="toc-text">SVM源码</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="SVM算法描述"><a href="#SVM算法描述" class="headerlink" title="SVM算法描述"></a>SVM算法描述</h2><hr>
+<p>支持向量机是监督机器学习方法的一种，属于线性分类器一种。在数据线性可分的状况下，SVM在保证训练数据上分类正确的情况下，最大化分类间隔，使得模型的泛化能力更强，但数据无法线性可分时，模型为每个样本增加一个变量作为违背间隔的损失，最小化所有样本上的损失和最大化软间隔折中。SVM的分类边界只与支持向量有关。<br>数据在低维空间线性不可分，但是映射到高维空间可能线性可分，使用映射函数S计算得到新的特征，代入计算发现只和内积有关，因此定义kernel function为S(X)T*S(X)。</p>
+<h2 id="SVM解法"><a href="#SVM解法" class="headerlink" title="SVM解法"></a>SVM解法</h2><hr>
+<p>解最优化问题时，利用拉格朗日因子转化为对偶问题，在求解中，利用SMO每次变动两个变量，固定其余所有变量（因为等式约束使得无法只优化一个变量），每次优化都会使目标向极小值迈进一步，然后再对其他变量优化，使得满足KKT。<br>在优化变量选择上，第一个变量选择使KKT违反最严重的，第二个变量选择改进最大的。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><hr>
+<p>下面是一个垃圾短信识别的例子，利用word2vec作为特征，然后输入SVM判别是否为垃圾短信，这是一个小作业，可能因为老师给的数据源比较简单，垃圾和非垃圾区别很大，使得识别准确率在99%，但是代码效率不高，其中部分循环操作用numpy的矩阵运算，已提高一部分效率。</p>
+<h2 id="SVM源码"><a href="#SVM源码" class="headerlink" title="SVM源码"></a>SVM源码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding:utf-8</span></div><div class="line"></div><div class="line"><span class="comment">#输入一个string 首先分词，然后读取本地word2vec模型，计算向量,</span></div><div class="line"><span class="comment">#读取本地的svm模型，做预测</span></div><div class="line"><span class="comment">#返回预测结果</span></div><div class="line"><span class="keyword">import</span> warnings</div><div class="line">warnings.filterwarnings(<span class="string">"ignore"</span>)</div><div class="line"></div><div class="line"><span class="keyword">import</span> jieba</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="keyword">try</span>:</div><div class="line">   <span class="keyword">import</span> cPickle <span class="keyword">as</span> pickle</div><div class="line"><span class="keyword">except</span>:</div><div class="line">   <span class="keyword">import</span> pickle</div><div class="line"><span class="keyword">import</span> gensim</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">svm_inter</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,sentence)</span>:</span></div><div class="line">        self.sentence = sentence</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">feature</span><span class="params">(self)</span>:</span></div><div class="line">        word_model = gensim.models.Word2Vec.load_word2vec_format(<span class="string">'../data/spam_word2vec_model'</span>,binary=<span class="keyword">True</span>)</div><div class="line">        seg_list = jieba.cut(self.sentence, cut_all=<span class="keyword">False</span>)</div><div class="line">        count = <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> seg_list:</div><div class="line">            <span class="keyword">if</span> j <span class="keyword">not</span> <span class="keyword">in</span> word_model:</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            <span class="keyword">if</span> count == <span class="number">0</span>:</div><div class="line">                old = word_model[j]</div><div class="line">                new = np.zeros(shape=old.shape)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                new = word_model[j]</div><div class="line">            old = old + new</div><div class="line">            count += <span class="number">1</span></div><div class="line">        <span class="keyword">if</span> (count != <span class="number">0</span>):</div><div class="line">            old = old * (<span class="number">1.0</span> / count)</div><div class="line">            self.x = list(old)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">kernel</span><span class="params">(self,x, y, sigma)</span>:</span></div><div class="line">        x = mat(x)</div><div class="line">        y = mat(y)</div><div class="line">        temp = x - y</div><div class="line">        <span class="keyword">return</span> math.exp(temp * temp.T / (<span class="number">-2</span>) * sigma * sigma)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">label</span><span class="params">(self, alphs_result, x_result, y_result, b)</span>:</span></div><div class="line">        num = len(alphs_result)</div><div class="line">        re = <span class="number">0.0</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(num):</div><div class="line">            re += alphs_result[i] * y_result[i] * self.kernel(x_result[i], self.x, <span class="number">1</span>)</div><div class="line">        re += b</div><div class="line">        <span class="keyword">if</span> (re &lt; <span class="number">0</span>):</div><div class="line">            <span class="keyword">return</span> <span class="number">-1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_label</span><span class="params">(self)</span>:</span></div><div class="line">        read_model = open(<span class="string">"../data/svm_mode_1.txt"</span>,<span class="string">'r'</span>)</div><div class="line">        data_string = read_model.read().split(<span class="string">"****&amp;&amp;"</span>)</div><div class="line">        alphs_result = pickle.loads(data_string[<span class="number">0</span>])</div><div class="line">        x_result = pickle.loads(data_string[<span class="number">1</span>])</div><div class="line">        y_result = pickle.loads(data_string[<span class="number">2</span>])</div><div class="line">        b = pickle.loads(data_string[<span class="number">3</span>])</div><div class="line">        read_model.close()</div><div class="line"></div><div class="line">        pre = self.label(alphs_result, x_result, y_result, b)</div><div class="line">        <span class="keyword">if</span>(pre == <span class="number">1</span>):</div><div class="line">            <span class="keyword">print</span><span class="string">"垃圾短信"</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">print</span> <span class="string">"正常短信"</span></div><div class="line">        <span class="keyword">return</span> pre</div><div class="line"></div><div class="line">sentence = <span class="string">"我们小组是最棒的 每个人都很给力"</span></div><div class="line">test = svm_inter(sentence)</div><div class="line">test.feature()</div><div class="line"><span class="keyword">print</span> sentence</div><div class="line">pre =test.get_label()</div></pre></td></tr></table></figure>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/object-Object/">[object Object]</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://eilene.github.io/2016/07/08/svm/" data-title="bandit learning | Eilene&#39;s blog" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/07/08/banditlearning/" title="bandit learning">
+  <strong>上一篇：</strong><br/>
+  <span>
+  bandit learning</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/04/09/说坐就坐的夜间火车-md/"  title="说坐就坐的夜间火车">
+ <strong>下一篇：</strong><br/> 
+ <span>说坐就坐的夜间火车
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/07/08/svm/" data-title="bandit learning" data-url="http://eilene.github.io/2016/07/08/svm/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SVM算法描述"><span class="toc-number">1.</span> <span class="toc-text">SVM算法描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SVM解法"><span class="toc-number">2.</span> <span class="toc-text">SVM解法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#示例"><span class="toc-number">3.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SVM源码"><span class="toc-number">4.</span> <span class="toc-text">SVM源码</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/algorithm/" title="algorithm">algorithm<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/data-structure/" title="data structure">data structure<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/life/" title="life">life<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/mini-project/" title="mini_project">mini_project<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/散记/" title="散记">散记<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/读书看剧笔记/" title="读书看剧笔记">读书看剧笔记<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/algorithm/" title="algorithm">algorithm<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/object-Object/" title="[object Object]">[object Object]<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/my-life/" title="my life">my life<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/散记/" title="散记">散记<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/machine-learning/" title="machine learning">machine learning<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/读书笔记/" title="读书笔记">读书笔记<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HMM/" title="HMM">HMM<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/data-structure/" title="data structure">data structure<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/HMM/" style="font-size: 10px;">HMM</a> <a href="/tags/object-Object/" style="font-size: 16.67px;">[object Object]</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/data-structure/" style="font-size: 10px;">data structure</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/my-life/" style="font-size: 13.33px;">my life</a> <a href="/tags/散记/" style="font-size: 10px;">散记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
+    </div>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://nphard.me" target="_blank" title="hard&#39;s Blog">hard&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Eilene. <br/>
+			Stay hungary,Stay Foolish.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/Eilene" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:sdxb001@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="xubingbing">xubingbing</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"eilene"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
